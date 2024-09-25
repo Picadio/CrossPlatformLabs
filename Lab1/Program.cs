@@ -31,11 +31,11 @@ public class Program()
 
     public static int[] Calculate(int count, int number)
     {
-        var answerArray = new int[count];
         if (!ValidateUtil.Validate(count, number))
         {
-            return answerArray;
+            return new int[1];
         }
+        var answerArray = new int[count];
         var allNumbers = MathUtil.GetFilledList(count);
         
         var indexInAnswerArray = 0;
@@ -50,11 +50,22 @@ public class Program()
             
             answerArray[indexInAnswerArray] = allNumbers[indexOfNumber];
             allNumbers.Remove(answerArray[indexInAnswerArray]);
-            
+            Console.Write($"Answer array step {indexInAnswerArray + 1}: ");
+            foreach (var i1 in answerArray)
+            {
+                 Console.Write(i1 + " ");
+            }
+            Console.WriteLine();
             indexInAnswerArray++;
         }
 
         answerArray[indexInAnswerArray] = allNumbers[0];
+        Console.Write($"Answer array step {indexInAnswerArray + 1}: ");
+        foreach (var i1 in answerArray)
+        {
+            Console.Write(i1 + " ");
+        }
+        Console.WriteLine();
         return answerArray;
     }
 }
