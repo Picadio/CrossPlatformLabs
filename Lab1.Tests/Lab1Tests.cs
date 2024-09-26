@@ -39,6 +39,7 @@ public class Lab1Tests
         Assert.False(ValidateUtil.Validate(2, 10));
         Assert.True(ValidateUtil.Validate(3, 4));
         Assert.True(ValidateUtil.Validate(12, 100));
+        Assert.False(ValidateUtil.Validate(15, 100));
     }
     [Fact]
     public void TestGetFilledList()
