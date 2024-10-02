@@ -11,7 +11,6 @@ public class FileReader(string path)
         {
             lines.Add(line);
         }
-
         return lines;
     }
 }

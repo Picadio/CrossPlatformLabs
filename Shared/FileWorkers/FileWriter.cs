@@ -4,7 +4,7 @@ public class FileWriter(string path)
 {
     public void Write(string line)
     {
-        if (!File.Exists(line))
+        if (!File.Exists(path))
         {
             File.Create(path).Close();
         }

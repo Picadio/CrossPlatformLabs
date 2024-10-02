@@ -13,7 +13,7 @@
     </Target>
 
     <Target Name="Test">
-        <Exec Command="dotnet test $(Solution)" />
+        <Exec Command="dotnet test Tests" />
     </Target>
 
     <Target Name="Run">
