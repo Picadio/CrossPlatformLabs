@@ -14,7 +14,7 @@ dotnet build Build.proj -p:Solution=Lab1 -t:Build
 
 ### Test
 ```bash
-dotnet build Build.proj -p:Solution=Lab1.Tests -t:Test
+dotnet build Build.proj -t:Test
 ```
 
 ### Run
