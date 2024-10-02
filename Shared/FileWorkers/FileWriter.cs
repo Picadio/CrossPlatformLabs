@@ -1,4 +1,4 @@
-namespace Lab1;
+namespace Shared.FileWorkers;
 
 public class FileWriter(string path)
 {

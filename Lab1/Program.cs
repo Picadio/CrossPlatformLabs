@@ -1,6 +1,7 @@
 ﻿
 using Lab1;
 using Lab1.Util;
+using Shared.FileWorkers;
 
 public class Program()
 {
