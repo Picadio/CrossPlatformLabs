@@ -2,7 +2,7 @@ using Lab1.Util;
 
 namespace Lab1.Tests;
 
-public class Lab1Tests
+public class UnitTest1
 {
     [Fact]
     public void TestFactorial()
@@ -17,12 +17,15 @@ public class Lab1Tests
     {
         var lines = new List<string?> { "1", "2" };
         var parser = new Parser(lines);
-        Assert.True(parser.Parse());
+        parser.Parse();
+        Assert.True(parser.IsDataCorrect);
         lines.Add("wd");
-        Assert.False(parser.Parse());
+        parser.Parse();
+        Assert.False(parser.IsDataCorrect);
         lines.Remove("wd");
         lines.Add("3");
-        Assert.False(parser.Parse());
+        parser.Parse();
+        Assert.False(parser.IsDataCorrect);
     }
     [Fact]
     public void TestCalculate()

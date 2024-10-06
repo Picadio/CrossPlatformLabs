@@ -1,7 +1,7 @@
-﻿
-using Lab1;
-using Lab1.Util;
+﻿using Lab1.Util;
 using Shared.FileWorkers;
+
+namespace Lab1;
 
 public class Program()
 {
@@ -17,7 +17,8 @@ public class Program()
         var fileReader = new FileReader(PathInput);
         var lines = fileReader.ReadAllLines();
         var parser = new Parser(lines);
-        if (parser.Parse())
+        parser.Parse();
+        if (parser.IsDataCorrect)
         {
             var answerArray = Calculate(parser.N, parser.K);
             var answer = answerArray.Aggregate("", (current, i) => current + (i + " "));
@@ -54,7 +55,7 @@ public class Program()
             Console.Write($"Answer array step {indexInAnswerArray + 1}: ");
             foreach (var i1 in answerArray)
             {
-                 Console.Write(i1 + " ");
+                Console.Write(i1 + " ");
             }
             Console.WriteLine();
             indexInAnswerArray++;
