@@ -10,7 +10,6 @@ public class Program
     public static void Main(string[] args)
     {
         var fileReader = new FileReader(PathInput);
-        Console.WriteLine(PathInput);
         var lines = fileReader.ReadAllLines();
         var parser = new Parser(lines);
         parser.Parse();
