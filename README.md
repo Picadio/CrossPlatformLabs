@@ -9,15 +9,17 @@
 
 ### Build
 ```bash
-dotnet build Build.proj -p:Solution=Lab1 -t:Build
+dotnet build Build.proj -p:Solution=X -t:Build
 ```
 
 ### Test
 ```bash
-dotnet build Build.proj -t:Test
+dotnet build Build.proj -p:Solution=X -t:Test
 ```
 
 ### Run
 ```bash
-dotnet build Build.proj -p:Solution=Lab1 -t:Run
+dotnet build Build.proj -p:Solution=X -t:Run
 ```
+
+*Where X - Lab1, Lab2 or Lab3*
