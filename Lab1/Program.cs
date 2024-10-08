@@ -3,17 +3,12 @@ using Shared.FileWorkers;
 
 namespace Lab1;
 
-public class Program()
+public class Program
 {
     private static readonly string PathInput = Path.Combine(Path.GetFullPath("Lab1"), "Files", "INPUT.txt");
     private static readonly string PathOutput = Path.Combine(Path.GetFullPath("Lab1"), "Files", "OUTPUT.txt");
     public static void Main(String[] args)
     {
-        if (!File.Exists(PathInput))
-        {
-            Console.WriteLine("Input file not exists");
-            return;
-        }
         var fileReader = new FileReader(PathInput);
         var lines = fileReader.ReadAllLines();
         var parser = new Parser(lines);
