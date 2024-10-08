@@ -55,6 +55,11 @@ public class Parser(List<string?> lines)
 
                 for (var columnIndex = 0; columnIndex < w; columnIndex++)
                 {
+                    if (line[columnIndex] != '.' && line[columnIndex] != 'X')
+                    {
+                        Console.WriteLine("Board must have only . or X");
+                        return;
+                    }
                     board[lineIndex-2, columnIndex] = line[columnIndex];
                 }
             }
@@ -91,6 +96,10 @@ public class Parser(List<string?> lines)
             lineIndex++;
         }
 
+        if (Queries.Count == 0)
+        {
+            return;
+        }
         IsDataCorrect = true;
         Lab3 = new Lab3(h, w, board);
     }
