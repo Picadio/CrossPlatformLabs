@@ -26,9 +26,10 @@ public class Program
         }
     }
 
-    private static int Calculate(int n, int[,] matrix)
+    public static int Calculate(int n, int[,] matrix)
     {
         var dp = new int[n + 1, n + 1];
+        dp[0, 0] = 0;
         for (var i = 1; i <= n; i++)
         {
             for (var j = 0; j <= n; j++)
@@ -36,10 +37,7 @@ public class Program
                 dp[i, j] = dp[i - 1, j];
                 for (var s = 1; s <= j; s++)
                 {
-                    if (dp[i, j] < matrix[s, i] + dp[i - 1, j - s])
-                    {
-                        dp[i, j] = matrix[s, i] + dp[i - 1, j - s];
-                    }
+                    dp[i, j] = Math.Max(dp[i, j], matrix[s-1, i-1] + dp[i - 1, j - s]);
                 }
             }
         }
