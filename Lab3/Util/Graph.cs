@@ -35,7 +35,10 @@ public class Graph
             var node = queue.Dequeue();
             
             visited.Add(node);
-            
+            if (!_edges.ContainsKey(node))
+            {
+                continue;
+            }
             foreach (int neighbor in _edges[node].Where(neighbor => !visited.Contains(neighbor)))
             {
                 queue.Enqueue(neighbor);
