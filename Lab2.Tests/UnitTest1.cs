@@ -17,6 +17,18 @@ public class UnitTest1
         Assert.True(answer == 1);
     }
     [Fact]
+    public void TestCalculate3()
+    {
+        var answer = Program.Calculate(2, new [,]{{1, 3}, {3, 2}});
+        Assert.True(answer == 4);
+    }
+    [Fact]
+    public void TestCalculate4()
+    {
+        var answer = Program.Calculate(4, new [,]{{1, 3, 5, 6}, {3, 2, 3, 2}, {1, 2, 3, 4}, {10, 12, 100, 1}});
+        Assert.True(answer == 100);
+    }
+    [Fact]
     public void TestParser()
     {
         var lines = new List<string?> { "1", "1" };

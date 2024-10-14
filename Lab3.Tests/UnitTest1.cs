@@ -41,4 +41,16 @@ public class UnitTest1
         var distances = graph.BreadthFirstSearch(1);
         Assert.True(distances[6] == 3);
     }
+    [Fact]
+    public void TestGraph2()
+    {
+        var graph = new Graph();
+        graph.AddEdge(1, 2, false);
+        graph.AddEdge(2, 3, false);
+        graph.AddEdge(3, 4, false);
+        graph.AddEdge(4, 5, false);
+        graph.AddEdge(7, 6, false);
+        var distances = graph.BreadthFirstSearch(1);
+        Assert.True(distances[1] == 0);
+    }
 }
