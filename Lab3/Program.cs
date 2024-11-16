@@ -1,6 +1,8 @@
 ﻿using Lab3.Util;
 using Shared.FileWorkers;
 
+namespace Lab3;
+
 public class Program
 {
     private static readonly string PathInput = Path.Combine(Path.GetFullPath("Lab3"), "Files", "INPUT.txt");
