@@ -8,7 +8,7 @@
 Vagrant.configure("2") do |config|
   # Define Ubuntu VM
   config.vm.define "ubuntu" do |ubuntu|
-    ubuntu.vm.box = "ubuntu/bionic64"
+    ubuntu.vm.box = "ubuntu/jammy64"
     ubuntu.vm.hostname = "ubuntu-vm"
     ubuntu.vm.network "forwarded_port", guest: 5000, host: 5000
     ubuntu.vm.network "private_network", type: "static", ip: "192.168.56.10"
@@ -24,9 +24,12 @@ Vagrant.configure("2") do |config|
     windows.vm.box = "gusztavvargadr/windows-10"
     windows.vm.hostname = "windows-vm"
     windows.vm.network "private_network", type: "static", ip: "192.168.56.20"
+    windows.vm.network "forwarded_port", guest: 5000, host: 6000
     windows.vm.provider "virtualbox" do |vb|
       vb.memory = "6096"
       vb.cpus = 4
+      vb.customize ["modifyvm", :id, "--nictype1", "82540EM"]
+      vb.customize ["modifyvm", :id, "--nictype2", "82540EM"]
     end
     windows.vm.provision "shell", path: "windows-provision.sh"
   end
