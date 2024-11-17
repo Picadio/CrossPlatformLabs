@@ -4,3 +4,5 @@
 CrossPlatformLabs.sln.DotSettings.user
 .vagrant
 ubuntu-bionic-18.04-cloudimg-console.log
+database.db
+identifier.sqlite

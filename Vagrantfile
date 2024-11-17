@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
     windows.vm.network "private_network", type: "static", ip: "192.168.56.20"
     windows.vm.network "forwarded_port", guest: 5000, host: 6000
     windows.vm.provider "virtualbox" do |vb|
-      vb.memory = "6096"
+      vb.memory = "2048"
       vb.cpus = 4
       vb.customize ["modifyvm", :id, "--nictype1", "82540EM"]
       vb.customize ["modifyvm", :id, "--nictype2", "82540EM"]

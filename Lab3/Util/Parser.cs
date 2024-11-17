@@ -47,11 +47,7 @@ public class Parser(List<string?> lines)
             }
             else if(lineIndex > 1 && lineIndex <= h+1)
             {
-                if (line.Length != w)
-                {
-                    Console.WriteLine("board weight must equal W");
-                    return;
-                }
+                
 
                 for (var columnIndex = 0; columnIndex < w; columnIndex++)
                 {
