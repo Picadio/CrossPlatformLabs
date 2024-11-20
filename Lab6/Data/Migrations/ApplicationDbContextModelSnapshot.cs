@@ -64,7 +64,13 @@ namespace Lab6.Data.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("AuthorId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("BookCategoryCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("BookCategoryCode1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("BookComments")
@@ -81,7 +87,7 @@ namespace Lab6.Data.Migrations
                     b.Property<DateOnly>("DateAcquired")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("DateOfPublication")
+                    b.Property<DateTime>("DateOfPublication")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ISBN")
@@ -93,8 +99,12 @@ namespace Lab6.Data.Migrations
                     b.HasIndex("AuthorId")
                         .IsUnique();
 
+                    b.HasIndex("AuthorId1");
+
                     b.HasIndex("BookCategoryCode")
                         .IsUnique();
+
+                    b.HasIndex("BookCategoryCode1");
 
                     b.ToTable("Books");
                 });
@@ -139,6 +149,9 @@ namespace Lab6.Data.Migrations
                     b.Property<Guid>("ContactTypeCode")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("ContactTypeCode1")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ContactWorkPhoneNumber")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -147,6 +160,8 @@ namespace Lab6.Data.Migrations
 
                     b.HasIndex("ContactTypeCode")
                         .IsUnique();
+
+                    b.HasIndex("ContactTypeCode1");
 
                     b.ToTable("Contacts");
                 });
@@ -191,6 +206,9 @@ namespace Lab6.Data.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("CustomerId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateOnly>("OrderDate")
                         .HasColumnType("TEXT");
 
@@ -202,6 +220,8 @@ namespace Lab6.Data.Migrations
 
                     b.HasIndex("CustomerId")
                         .IsUnique();
+
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Orders");
                 });
@@ -215,6 +235,9 @@ namespace Lab6.Data.Migrations
                     b.Property<Guid>("BookId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("BookId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("ItemAgreedPrice")
                         .HasColumnType("REAL");
 
@@ -225,13 +248,20 @@ namespace Lab6.Data.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("OrderId1")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("ItemNumber");
 
                     b.HasIndex("BookId")
                         .IsUnique();
 
+                    b.HasIndex("BookId1");
+
                     b.HasIndex("OrderId")
                         .IsUnique();
+
+                    b.HasIndex("OrderId1");
 
                     b.ToTable("OrderItems");
                 });
@@ -259,11 +289,27 @@ namespace Lab6.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Lab6.Data.Entities.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Lab6.Data.Entities.BookCategory", null)
                         .WithOne()
                         .HasForeignKey("Lab6.Data.Entities.Book", "BookCategoryCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Lab6.Data.Entities.BookCategory", "BookCategory")
+                        .WithMany()
+                        .HasForeignKey("BookCategoryCode1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("BookCategory");
                 });
 
             modelBuilder.Entity("Lab6.Data.Entities.Contact", b =>
@@ -273,6 +319,14 @@ namespace Lab6.Data.Migrations
                         .HasForeignKey("Lab6.Data.Entities.Contact", "ContactTypeCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Lab6.Data.Entities.RefContactType", "ContactType")
+                        .WithMany()
+                        .HasForeignKey("ContactTypeCode1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContactType");
                 });
 
             modelBuilder.Entity("Lab6.Data.Entities.Order", b =>
@@ -282,6 +336,14 @@ namespace Lab6.Data.Migrations
                         .HasForeignKey("Lab6.Data.Entities.Order", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Lab6.Data.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Lab6.Data.Entities.OrderItem", b =>
@@ -292,11 +354,27 @@ namespace Lab6.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Lab6.Data.Entities.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Lab6.Data.Entities.Order", null)
                         .WithOne()
                         .HasForeignKey("Lab6.Data.Entities.OrderItem", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Lab6.Data.Entities.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

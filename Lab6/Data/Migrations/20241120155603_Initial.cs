@@ -77,11 +77,13 @@ namespace Lab6.Data.Migrations
                     AuthorId = table.Column<Guid>(type: "TEXT", nullable: false),
                     BookCategoryCode = table.Column<Guid>(type: "TEXT", nullable: false),
                     ISBN = table.Column<string>(type: "TEXT", nullable: false),
-                    DateOfPublication = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    DateOfPublication = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DateAcquired = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     BookTitle = table.Column<string>(type: "TEXT", nullable: false),
                     BookRecommendedPrice = table.Column<double>(type: "REAL", nullable: false),
-                    BookComments = table.Column<string>(type: "TEXT", nullable: false)
+                    BookComments = table.Column<string>(type: "TEXT", nullable: false),
+                    AuthorId1 = table.Column<Guid>(type: "TEXT", nullable: false),
+                    BookCategoryCode1 = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,8 +95,20 @@ namespace Lab6.Data.Migrations
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Books_Authors_AuthorId1",
+                        column: x => x.AuthorId1,
+                        principalTable: "Authors",
+                        principalColumn: "AuthorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Books_BookCategories_BookCategoryCode",
                         column: x => x.BookCategoryCode,
+                        principalTable: "BookCategories",
+                        principalColumn: "BookCategoryCode",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Books_BookCategories_BookCategoryCode1",
+                        column: x => x.BookCategoryCode1,
                         principalTable: "BookCategories",
                         principalColumn: "BookCategoryCode",
                         onDelete: ReferentialAction.Cascade);
@@ -107,7 +121,8 @@ namespace Lab6.Data.Migrations
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CustomerId = table.Column<Guid>(type: "TEXT", nullable: false),
                     OrderDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    OrderValue = table.Column<string>(type: "TEXT", nullable: false)
+                    OrderValue = table.Column<string>(type: "TEXT", nullable: false),
+                    CustomerId1 = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,6 +130,12 @@ namespace Lab6.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId1",
+                        column: x => x.CustomerId1,
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
@@ -130,7 +151,8 @@ namespace Lab6.Data.Migrations
                     ContactLastName = table.Column<string>(type: "TEXT", nullable: false),
                     ContactWorkPhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
                     ContactCellPhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    ContactOtherDetails = table.Column<string>(type: "TEXT", nullable: false)
+                    ContactOtherDetails = table.Column<string>(type: "TEXT", nullable: false),
+                    ContactTypeCode1 = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,6 +160,12 @@ namespace Lab6.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Contacts_RefContactTypes_ContactTypeCode",
                         column: x => x.ContactTypeCode,
+                        principalTable: "RefContactTypes",
+                        principalColumn: "ContactTypeCode",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Contacts_RefContactTypes_ContactTypeCode1",
+                        column: x => x.ContactTypeCode1,
                         principalTable: "RefContactTypes",
                         principalColumn: "ContactTypeCode",
                         onDelete: ReferentialAction.Cascade);
@@ -152,7 +180,9 @@ namespace Lab6.Data.Migrations
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: false),
                     BookId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ItemAgreedPrice = table.Column<double>(type: "REAL", nullable: false),
-                    ItemComment = table.Column<string>(type: "TEXT", nullable: false)
+                    ItemComment = table.Column<string>(type: "TEXT", nullable: false),
+                    OrderId1 = table.Column<Guid>(type: "TEXT", nullable: false),
+                    BookId1 = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,8 +194,20 @@ namespace Lab6.Data.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_OrderItems_Books_BookId1",
+                        column: x => x.BookId1,
+                        principalTable: "Books",
+                        principalColumn: "BookId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId1",
+                        column: x => x.OrderId1,
                         principalTable: "Orders",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
@@ -178,10 +220,20 @@ namespace Lab6.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Books_AuthorId1",
+                table: "Books",
+                column: "AuthorId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Books_BookCategoryCode",
                 table: "Books",
                 column: "BookCategoryCode",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_BookCategoryCode1",
+                table: "Books",
+                column: "BookCategoryCode1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contacts_ContactTypeCode",
@@ -190,10 +242,20 @@ namespace Lab6.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Contacts_ContactTypeCode1",
+                table: "Contacts",
+                column: "ContactTypeCode1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_BookId",
                 table: "OrderItems",
                 column: "BookId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_BookId1",
+                table: "OrderItems",
+                column: "BookId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
@@ -202,10 +264,20 @@ namespace Lab6.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId1",
+                table: "OrderItems",
+                column: "OrderId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId1",
+                table: "Orders",
+                column: "CustomerId1");
         }
 
         /// <inheritdoc />

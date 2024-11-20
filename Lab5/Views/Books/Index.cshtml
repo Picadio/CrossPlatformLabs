@@ -1,0 +1,78 @@
+@model IEnumerable<Lab5.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Books</h1>
+
+<form asp-action="Index" method="get" class="form-inline mb-3">
+    <div class="form-group">
+        <input 
+            type="datetime-local" 
+            name="date" 
+            value="@ViewData["SearchQueryDate"]" 
+            class="form-control mr-2" 
+            placeholder="Пошук за датою.." />
+        <button type="submit" class="btn btn-primary">Шукати</button>
+    </div>
+</form>
+<form asp-action="Index" method="get" class="form-inline mb-3">
+    <div class="form-group">
+        <input 
+            type="text" 
+            name="name" 
+            value="@ViewData["SearchQueryName"]" 
+            class="form-control mr-2" 
+            placeholder="Пошук за назвою..(можно через кому: Book, L, N)" />
+        <button type="submit" class="btn btn-primary">Шукати</button>
+    </div>
+</form>
+<a asp-action="Index">Reset</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookRecommendedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAcquired)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookRecommendedPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAcquired)
+            </td>
+           <td>
+              <a asp-action="Details" asp-route-id="@item.BookId">Details</a>
+          </td>
+        </tr>
+    }
+    </tbody>
+</table>

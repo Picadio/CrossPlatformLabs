@@ -9,7 +9,7 @@ public class Book
     public Guid AuthorId { get; set; }
     public Guid BookCategoryCode { get; set; }
     public string ISBN { get; set; }
-    public DateOnly DateOfPublication { get; set; }
+    public DateTime DateOfPublication { get; set; }
     public DateOnly DateAcquired { get; set; }
     public string BookTitle { get; set; }
     public double BookRecommendedPrice { get; set; }

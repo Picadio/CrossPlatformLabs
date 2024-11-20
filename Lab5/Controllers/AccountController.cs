@@ -20,6 +20,7 @@ public class AccountController(ApplicationDbContext applicationDbContext): Contr
     public async Task<IActionResult> Register(RegisterModel model)
     {
         var token = HttpContext.Session.GetString("token");
+        var idToken = HttpContext.Session.GetString("IdToken");
         if (ModelState.IsValid && token != null)
         {
             if (applicationDbContext.Users.FirstOrDefault(u => u.Username == model.Username) != null)
@@ -38,6 +39,7 @@ public class AccountController(ApplicationDbContext applicationDbContext): Contr
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim("FullName", user.FullName),
                 new Claim(ClaimTypes.MobilePhone, user.PhoneNumber),
+                new Claim("IdToken", idToken)
             };
             
             var claimsIdentity = new ClaimsIdentity(
