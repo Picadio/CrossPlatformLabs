@@ -36,7 +36,7 @@ public class GoogleOAuthController(ApplicationDbContext applicationDbContext) : 
         var codeVerifier = HttpContext.Session.GetString("codeVerifier");
         var redirectUrl = "http://localhost:5256/GoogleOAuth/Code";
         var tokenResult = await GoogleOAuthService.GetTokenByCode(code, codeVerifier, redirectUrl);
-        
+        Console.WriteLine(tokenResult.IdToken);
         HttpContext.Session.SetString("token", tokenResult.AccessToken);
         var googleId = await GoogleOAuthService.GetGoogleId(tokenResult.AccessToken);
         var foundUser = applicationDbContext.Users.FirstOrDefault(user => user.GoogleId == googleId);

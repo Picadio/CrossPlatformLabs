@@ -52,30 +52,6 @@ public class GoogleOAuthService
         var result = JsonSerializer.Deserialize<OAuthToken>(json);
         return result;
     }
-
-    public static async Task<OAuthToken> RefreshToken(string refreshToken)
-    {
-        var refreshEndpoint = "https://oauth2.googleapis.com/token";
-        var queryParams = new Dictionary<string, string>()
-        {
-            { "client_id", ClientId },
-            { "client_secret", ClientSecret },
-            { "grant_type", "refresh_token" },
-            { "refresh_token", refreshToken }
-        };
-        var client = new HttpClient();
-        var content = new FormUrlEncodedContent(queryParams);
-
-        var response = await client.PostAsync(refreshEndpoint, content);
-        var json = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpRequestException(json);
-        }
-      
-        var result = JsonSerializer.Deserialize<OAuthToken>(json);
-        return result;
-    }
     public static async Task<string> GetGoogleId(string token)
     {
         var client = new HttpClient();
